@@ -4,7 +4,9 @@ import sys
 
 center = ''                 # string value for center
 letters = set()             # set of tile letters
+panagrams_to_try = set()    # set of panagrams to try
 words_to_try = set()        # set of words to try in the game
+best_words = dict()         # dictionary of words and point value
 
 # Get center tile
 while True:
@@ -37,10 +39,23 @@ for word in all_words:
     word = word.strip().lower().replace("'","")
     # Check if the word meets all conditions while failing fast
     if (len(word) >= 4) and (center in word) and (set(word).issubset(letters)):
-        words_to_try.add(word)
+        # Check if panagram
+        if letters.issubset(set(word)):
+            panagrams_to_try.add(word)
+        else:
+            words_to_try.add(word)
+
+# Add panagrams and words with points to dictionary
+for word in panagrams_to_try:
+    points = len(word) + 7
+    best_words[word] = points
+
+for word in words_to_try:
+    points = len(word)
+    best_words[word] = points
         
 print("Possible words are:")
 # Sort words with longest printed first, as these are worth the most points
-for word in sorted(words_to_try, key = len, reverse = True):
-    word = word.upper()
-    print(word)
+for word in sorted(best_words.items(), key = lambda item: item[1], reverse = True):
+    printed_word = word[0].upper()
+    print(printed_word + "\tpoints: " + str(word[1]))
