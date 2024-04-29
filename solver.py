@@ -10,7 +10,7 @@ best_words = dict()         # dictionary of words and point value
 
 # Get center tile
 while True:
-    center_input = input("Please enter the center tile letter:").lower()
+    center_input = input("Please enter the center tile letter: ").lower()
     # Check for correct input
     if center_input.isalpha() and (len(center_input) == 1):
         # Add letter to center and letters set then break out of this loop
@@ -22,7 +22,7 @@ while True:
     
 # There are 7 tiles in total
 while len(letters) < 7:
-    c = input("Please enter the next tile letter:").lower()
+    c = input("Please enter the next tile letter: ").lower()
     if c.isalpha() and (len(c) == 1):
         letters.add(c)
     
