@@ -52,10 +52,13 @@ for word in panagrams_to_try:
 
 for word in words_to_try:
     points = len(word)
-    best_words[word] = points
+    if points == 4:
+        best_words[word] = 1
+    else:
+        best_words[word] = points
         
 print("Possible words are:")
 # Sort words with longest printed first, as these are worth the most points
 for word in sorted(best_words.items(), key = lambda item: item[1], reverse = True):
     printed_word = word[0].upper()
-    print(printed_word + "\tpoints: " + str(word[1]))
+    print(printed_word + "\t\tpoints: " + str(word[1]))
