@@ -10,7 +10,7 @@ best_words = dict()         # dictionary of words and point value
 
 # Get center tile
 while True:
-    center_input = input("Please enter the center tile letter:").lower()
+    center_input = input("Please enter the center tile letter: ").lower()
     # Check for correct input
     if center_input.isalpha() and (len(center_input) == 1):
         # Add letter to center and letters set then break out of this loop
@@ -22,7 +22,7 @@ while True:
     
 # There are 7 tiles in total
 while len(letters) < 7:
-    c = input("Please enter the next tile letter:").lower()
+    c = input("Please enter the next tile letter: ").lower()
     if c.isalpha() and (len(c) == 1):
         letters.add(c)
     
@@ -52,10 +52,13 @@ for word in panagrams_to_try:
 
 for word in words_to_try:
     points = len(word)
-    best_words[word] = points
+    if points == 4:
+        best_words[word] = 1
+    else:
+        best_words[word] = points
         
 print("Possible words are:")
 # Sort words with longest printed first, as these are worth the most points
 for word in sorted(best_words.items(), key = lambda item: item[1], reverse = True):
     printed_word = word[0].upper()
-    print(printed_word + "\tpoints: " + str(word[1]))
+    print(printed_word + "\t\tpoints: " + str(word[1]))
