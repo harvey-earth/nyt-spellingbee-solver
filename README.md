@@ -8,7 +8,8 @@ When you run the program it asks you for the center tile letter and then the oth
 2. Change/modify words.txt if you want to use a different word list
 2. Run `chmod +x solver.py`
 3. Run `./solver.py` and enter required input
-4. Output will be in terminal
+	- Or run `./solver.py -f` to output to a text file with the date in the filename
+4. Output is sorted with highest points first
 
 # Wordlist
 For my word list I used a custom wordlist generated from http://app.aspell.net/create using SCOWL with parameters:

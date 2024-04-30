@@ -1,12 +1,24 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
+import argparse
+import datetime
 import sys
+from datetime import date
+ 
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--file", action="store_true", help="Output to a file with todays date")
 
+args = parser.parse_args()
+
+possible_words_label = 'Possible words are:'
+best_words = dict()         # dictionary of words and point value
 center = ''                 # string value for center
 letters = set()             # set of tile letters
 panagrams_to_try = set()    # set of panagrams to try
 words_to_try = set()        # set of words to try in the game
-best_words = dict()         # dictionary of words and point value
+
+today = datetime.date.today()
+output_filename = today.strftime("%Y-%m-%d") + "-solutions" + ".txt"
 
 # Get center tile
 while True:
@@ -57,8 +69,20 @@ for word in words_to_try:
     else:
         best_words[word] = points
         
-print("Possible words are:")
+if args.file:
+    output_file = open(output_filename, 'w')
+    output_file.write(possible_words_label + "\n")
+else:
+    print(possible_words_label)
+
 # Sort words with longest printed first, as these are worth the most points
 for word in sorted(best_words.items(), key = lambda item: item[1], reverse = True):
     printed_word = word[0].upper()
-    print(printed_word + "\t\tpoints: " + str(word[1]))
+    if args.file:
+        output_file.write(printed_word + "\t\tpoints: " + str(word[1]) + "\n")
+    else:
+        print(printed_word + "\t\tpoints: " + str(word[1]))
+
+if args.file:
+    output_file.close()
+
